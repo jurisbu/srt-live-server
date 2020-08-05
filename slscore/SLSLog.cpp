@@ -86,9 +86,11 @@ void CSLSLog::print_log(int level, const char *fmt, va_list vl)
     //sprintf(buf_info, "%s %s: %s\n" , cur_time, LOG_LEVEL_NAME[level], buf);
     sprintf(buf_info, "%s:%03d %s %s: %s\n" , cur_time, cur_time_msec, APP_NAME, LOG_LEVEL_NAME[level], buf);
     printf(buf_info);
+    fflush(stdout);
 
     if (m_log_file) {
         fwrite(buf_info, strlen(buf_info), 1, m_log_file);
+        fflush(m_log_file);
     }
 }
 
